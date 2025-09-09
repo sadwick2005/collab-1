@@ -5,185 +5,214 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CFNE Café Dashboard</title>
   <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f1e3; /* beige */
       color: #3e2c1c; /* dark brown */
-      position: relative;
-      overflow-x: hidden;
+      perspective: 1000px; /* needed for 3D */
     }
 
+    /* 3D styled header */
     header {
       background-color: #8b5e3c; /* coffee brown */
-      padding: 1rem 2rem;
+      padding: 1.2rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: white;
-      position: relative;
-      z-index: 10;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.3),
+        inset 0 -3px 6px rgba(255,255,255,0.15);
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+      border-radius: 0 0 15px 15px;
     }
 
     header h1 {
       margin: 0;
-      font-size: 1.8rem;
-      font-weight: bold;
+      font-size: 1.9rem;
+      font-weight: 800;
       letter-spacing: 2px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
     nav a {
-      margin: 0 15px;
+      margin: 0 18px;
       text-decoration: none;
       color: white;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: color 0.3s ease;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: color 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+      text-shadow: 0 0 2px rgba(0,0,0,0.3);
     }
 
     nav a:hover {
       color: #d6b07c;
+      transform: translateZ(10px) scale(1.1);
+      text-shadow: 0 0 6px #d6b07c;
     }
 
-    .hero {
-      padding: 3rem 2rem 2rem;
-      background-color: #fff6e5;
-      text-align: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-      font-weight: 500;
-      color: #5a3c2b;
-    }
-
-    button {
-      padding: 0.6rem 1.4rem;
-      background-color: #3e2c1c;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 25px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      box-shadow: 0 4px 6px rgba(62,44,28,0.5);
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #5a3c2b;
-    }
-
-    .poetry-section {
-      background-color: #e0c9a6;
-      padding: 2.5rem 2rem;
-      margin: 3rem auto 4rem;
-      max-width: 700px;
+    .cart-info {
+      background: #5a3c2b;
+      padding: 0.3rem 0.7rem;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(62,44,28,0.2);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-left: 6px;
+      display: inline-block;
+      vertical-align: middle;
+      min-width: 20px;
       text-align: center;
-      position: relative;
-      z-index: 10;
+      color: #fff;
+      box-shadow:
+        0 3px 6px rgba(0,0,0,0.4),
+        inset 0 -2px 4px rgba(255,255,255,0.3);
+      transform-style: preserve-3d;
     }
 
-    .poetry-section h3 {
+    main {
+      padding: 2.5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+      background: #fff6e5;
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      box-shadow:
+        0 8px 15px rgba(62,44,28,0.25),
+        inset 0 -4px 8px rgba(255,255,255,0.9);
+      transition: box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      transform: translateZ(0);
+    }
+
+    section:hover {
+      box-shadow:
+        0 16px 30px rgba(62,44,28,0.35),
+        inset 0 -6px 10px rgba(255,255,255,1);
+      transform: translateZ(20px) scale(1.03);
+      cursor: default;
+    }
+
+    .welcome {
+      text-align: center;
+    }
+
+    .welcome h2 {
+      font-size: 2.6rem;
+      margin-bottom: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-shadow: 1px 1px 3px rgba(62,44,28,0.2);
+    }
+
+    .welcome p {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: #5a3c2b;
+      font-weight: 600;
+      text-shadow: 0 0 1px rgba(90,60,43,0.3);
+    }
+
+    .poetry h3 {
       font-size: 1.8rem;
       margin-bottom: 1.2rem;
       font-weight: 700;
       color: #4a3621;
       letter-spacing: 1.2px;
+      text-shadow: 1px 1px 2px rgba(62,44,28,0.3);
     }
 
-    .poem {
+    .poetry p {
       font-style: italic;
       font-size: 1.2rem;
+      line-height: 1.7;
       color: #3e2c1c;
-      line-height: 1.8;
-      margin: 0 1rem;
+      font-weight: 600;
+      text-shadow: 0 0 2px rgba(62,44,28,0.15);
     }
 
     footer {
       background-color: #8b5e3c;
       color: white;
       text-align: center;
-      padding: 1rem 2rem;
-      font-weight: 600;
+      padding: 1.3rem 2rem;
+      font-weight: 700;
       letter-spacing: 1px;
-      position: relative;
-      z-index: 10;
+      box-shadow:
+        0 -5px 15px rgba(0,0,0,0.25);
+      border-radius: 15px 15px 0 0;
+      transform-style: preserve-3d;
     }
 
-    /* Visual Elements (SVG icons and shapes) */
-
-    /* Coffee cup icon as big background element */
-    .visual-coffee {
-      position: fixed;
-      bottom: 10%;
-      left: 5%;
-      width: 180px;
-      opacity: 0.08;
-      filter: drop-shadow(1px 1px 2px #6e4b29);
-      pointer-events: none;
-      z-index: 1;
-      transform: rotate(-15deg);
+    button {
+      background: linear-gradient(145deg, #5a3c2b, #4a2e1b);
+      border: none;
+      padding: 0.85rem 1.6rem;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow:
+        6px 6px 10px #3a2714,
+        -6px -6px 10px #6f4d2b;
+      transition:
+        box-shadow 0.3s ease,
+        transform 0.2s ease;
+      transform-style: preserve-3d;
     }
 
-    /* Book icon big background */
-    .visual-book {
-      position: fixed;
-      top: 15%;
-      right: 5%;
-      width: 160px;
-      opacity: 0.1;
-      filter: drop-shadow(1px 1px 2px #7b5c36);
-      pointer-events: none;
-      z-index: 1;
-      transform: rotate(10deg);
-    }
-
-    /* Subtle diagonal stripes background pattern */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background:
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 10px,
-          rgba(123, 92, 54, 0.05) 10px,
-          rgba(123, 92, 54, 0.05) 20px
-        );
-      z-index: 0;
-      pointer-events: none;
+    button:hover {
+      box-shadow:
+        inset 6px 6px 10px #3a2714,
+        inset -6px -6px 10px #6f4d2b;
+      transform: translateZ(12px) scale(1.05);
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      .hero h2 {
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 0 0 0 0;
+      }
+
+      nav {
+        margin-top: 0.7rem;
+      }
+
+      nav a {
+        margin: 0 8px 0 0;
+        font-size: 1rem;
+      }
+
+      main {
+        padding: 1.5rem 1rem;
+      }
+
+      section {
+        margin-bottom: 2.5rem;
+        padding: 1.5rem 1.7rem;
+      }
+
+      .welcome h2 {
         font-size: 2rem;
       }
-      .poetry-section {
-        margin: 2rem 1rem 3rem;
-        padding: 2rem 1rem;
-      }
-      .visual-coffee, .visual-book {
-        display: none;
+
+      button {
+        padding: 0.65rem 1.2rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -193,47 +222,55 @@
   <header>
     <h1>CFNE Café ☕📖</h1>
     <nav>
-      <a href="#">Home ☕</a>
-      <a href="#">Cart 🛒</a>
-      <a href="#">Payment 💳</a>
-      <a href="#">About Us 📖</a>
+      <a href="#" id="home">Home ☕</a>
+      <a href="#" id="cart">Cart 🛒 <span class="cart-info" id="cartCount">0</span></a>
+      <a href="#" id="payment">Payment 💳</a>
+      <a href="#" id="about">About Us 📖</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <h2>Welcome to CFNE Café</h2>
-    <p>Where the aroma of freshly brewed coffee meets heartfelt poetry—and every page you turn feels like a story coming alive.</p>
-    <button onclick="alert('Welcome to CFNE Café!')">Say Hi!</button>
-  </section>
+  <main>
+    <section class="welcome">
+      <h2>Welcome to CFNE Café</h2>
+      <p>Your cozy corner for delicious coffee and inspiring poetry.</p>
+      <button id="addToCartBtn">Add Coffee to Cart</button>
+    </section>
 
-  <section class="poetry-section">
-    <h3>Reading Poetry Corner 📚</h3>
-    <div class="poem">
+    <section class="poetry">
+      <h3>Reading Poetry Corner 📚</h3>
       <p>
-        In the quiet glow of morning light,<br />
-        He sips warmth, words softly ignite.<br />
-        Mug cradles dreams in coffee-stained streams,<br />
-        Pages hum with whispered themes.
+        Between each sip, a verse unfolds,<br/>
+        Warm words that comfort and inspire,<br/>
+        CFNE Café, where stories and brews combine,<br/>
+        A sanctuary for heart and mind.
       </p>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 CFNE Café — Brewed with care, read with heart</p>
+    &copy; 2025 CFNE Café — Brewed with care and creativity ☕📖
   </footer>
 
-  <!-- Visual Elements as inline SVG -->
+  <script>
+    const cartCountElem = document.getElementById('cartCount');
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    let cartCount = 0;
 
-  <!-- Coffee cup SVG -->
-  <svg class="visual-coffee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#8b5e3c" >
-    <path d="M48 16h-4v-2a6 6 0 0 0-12 0v2H16a2 2 0 0 0-2 2v10a14 14 0 0 0 28 0v-10a2 2 0 0 0-2-2Zm-12-2a4 4 0 0 1 8 0v2h-8ZM18 24v4a10 10 0 0 0 20 0v-4ZM40 36a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
-  </svg>
+    addToCartBtn.addEventListener('click', () => {
+      cartCount++;
+      cartCountElem.textContent = cartCount;
+      alert(`Added coffee to cart! Total items: ${cartCount}`);
+    });
 
-  <!-- Book SVG -->
-  <svg class="visual-book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#6b4e26">
-    <path d="M54 8H22a2 2 0 0 0-2 2v44a2 2 0 0 0 2 2h32V8ZM24 52V12h28v40Z"/>
-    <path d="M28 16h20v4H28zM28 24h20v4H28zM28 32h20v4H28z"/>
-  </svg>
-
+    // Highlight active menu link on click
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('nav a').forEach(a => a.style.color = 'white');
+        link.style.color = '#d6b07c';
+      });
+    });
+  </script>
+  
 </body>
 </html>

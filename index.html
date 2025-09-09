@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CFNE Café Dashboard</title>
   <style>
     body {
@@ -10,105 +10,180 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f1e3; /* beige */
       color: #3e2c1c; /* dark brown */
+      position: relative;
+      overflow-x: hidden;
     }
 
     header {
-      background-color: #8b5e3c; /* rich brown */
-      padding: 1rem;
+      background-color: #8b5e3c; /* coffee brown */
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: white;
+      position: relative;
+      z-index: 10;
     }
 
     header h1 {
       margin: 0;
       font-size: 1.8rem;
+      font-weight: bold;
+      letter-spacing: 2px;
     }
 
     nav a {
       margin: 0 15px;
       text-decoration: none;
       color: white;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 1rem;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      color: #d6b07c;
     }
 
     .hero {
-      padding: 2rem;
+      padding: 3rem 2rem 2rem;
       background-color: #fff6e5;
       text-align: center;
+      position: relative;
+      z-index: 10;
     }
 
     .hero h2 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
     }
 
     .hero p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .character {
-      margin: 2rem auto;
-      width: 140px;
-      height: auto;
-    }
-
-    .character img {
-      width: 100%;
-      image-rendering: pixelated;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    }
-
-    .poetry-section {
-      padding: 2rem;
-      background-color: #e0c9a6; /* warm tone */
-      margin: 2rem 0;
-      text-align: center;
-    }
-
-    .poetry-section h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .poem {
-      font-style: italic;
-      font-size: 1.1rem;
-    }
-
-    footer {
-      background-color: #8b5e3c;
-      color: white;
-      text-align: center;
-      padding: 1rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-weight: 500;
+      color: #5a3c2b;
     }
 
     button {
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1.4rem;
       background-color: #3e2c1c;
       color: white;
       border: none;
       cursor: pointer;
-      border-radius: 5px;
-      font-size: 1rem;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 6px rgba(62,44,28,0.5);
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
       background-color: #5a3c2b;
     }
 
+    .poetry-section {
+      background-color: #e0c9a6;
+      padding: 2.5rem 2rem;
+      margin: 3rem auto 4rem;
+      max-width: 700px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(62,44,28,0.2);
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .poetry-section h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      color: #4a3621;
+      letter-spacing: 1.2px;
+    }
+
+    .poem {
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #3e2c1c;
+      line-height: 1.8;
+      margin: 0 1rem;
+    }
+
+    footer {
+      background-color: #8b5e3c;
+      color: white;
+      text-align: center;
+      padding: 1rem 2rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Visual Elements (SVG icons and shapes) */
+
+    /* Coffee cup icon as big background element */
+    .visual-coffee {
+      position: fixed;
+      bottom: 10%;
+      left: 5%;
+      width: 180px;
+      opacity: 0.08;
+      filter: drop-shadow(1px 1px 2px #6e4b29);
+      pointer-events: none;
+      z-index: 1;
+      transform: rotate(-15deg);
+    }
+
+    /* Book icon big background */
+    .visual-book {
+      position: fixed;
+      top: 15%;
+      right: 5%;
+      width: 160px;
+      opacity: 0.1;
+      filter: drop-shadow(1px 1px 2px #7b5c36);
+      pointer-events: none;
+      z-index: 1;
+      transform: rotate(10deg);
+    }
+
+    /* Subtle diagonal stripes background pattern */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(123, 92, 54, 0.05) 10px,
+          rgba(123, 92, 54, 0.05) 20px
+        );
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
-      .character {
-        width: 100px;
+      .hero h2 {
+        font-size: 2rem;
+      }
+      .poetry-section {
+        margin: 2rem 1rem 3rem;
+        padding: 2rem 1rem;
+      }
+      .visual-coffee, .visual-book {
+        display: none;
       }
     }
   </style>
@@ -127,33 +202,38 @@
 
   <section class="hero">
     <h2>Welcome to CFNE Café</h2>
-    <p>Where cozy vibes, poetic lines, and pixel-perfect coffee await you. Grab a seat, sip your brew, and read something beautiful.</p>
-    <button onclick="alert('Thanks for visiting CFNE Café!')">Say Hi!</button>
+    <p>Where the aroma of freshly brewed coffee meets heartfelt poetry—and every page you turn feels like a story coming alive.</p>
+    <button onclick="alert('Welcome to CFNE Café!')">Say Hi!</button>
   </section>
-
-  <div class="character">
-    <img src="https://i.imgur.com/nlYpA9T.png" alt="Pixel art male character drinking coffee">
-  </div>
 
   <section class="poetry-section">
     <h3>Reading Poetry Corner 📚</h3>
     <div class="poem">
       <p>
-        In pixel shades of warm café light,<br>
-        He sips his brew in morning's quiet.<br>
-        Between the sips, a page unfolds,<br>
-        A tale of dreams and coffee told.
+        In the quiet glow of morning light,<br />
+        He sips warmth, words softly ignite.<br />
+        Mug cradles dreams in coffee-stained streams,<br />
+        Pages hum with whispered themes.
       </p>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 CFNE Café — Brewed with pixels and poetry ☕📖</p>
+    <p>&copy; 2025 CFNE Café — Brewed with care, read with heart</p>
   </footer>
 
-  <script>
-    console.log("CFNE Café Dashboard Loaded");
-  </script>
+  <!-- Visual Elements as inline SVG -->
+
+  <!-- Coffee cup SVG -->
+  <svg class="visual-coffee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#8b5e3c" >
+    <path d="M48 16h-4v-2a6 6 0 0 0-12 0v2H16a2 2 0 0 0-2 2v10a14 14 0 0 0 28 0v-10a2 2 0 0 0-2-2Zm-12-2a4 4 0 0 1 8 0v2h-8ZM18 24v4a10 10 0 0 0 20 0v-4ZM40 36a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+  </svg>
+
+  <!-- Book SVG -->
+  <svg class="visual-book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#6b4e26">
+    <path d="M54 8H22a2 2 0 0 0-2 2v44a2 2 0 0 0 2 2h32V8ZM24 52V12h28v40Z"/>
+    <path d="M28 16h20v4H28zM28 24h20v4H28zM28 32h20v4H28z"/>
+  </svg>
 
 </body>
 </html>

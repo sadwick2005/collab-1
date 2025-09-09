@@ -1,2 +1,2 @@
 # collab-1
-a common project
+working on a common project

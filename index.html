@@ -14,10 +14,10 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f5f1e3; /* beige */
       color: #3e2c1c; /* dark brown */
-      perspective: 1000px; /* needed for 3D */
+      perspective: 1000px;
     }
 
-    /* 3D styled header */
+    /* Header 3D style */
     header {
       background-color: #8b5e3c; /* coffee brown */
       padding: 1.2rem 2rem;
@@ -31,6 +31,7 @@
       transform-style: preserve-3d;
       transform: translateZ(0);
       border-radius: 0 0 15px 15px;
+      flex-wrap: wrap;
     }
 
     header h1 {
@@ -39,10 +40,20 @@
       font-weight: 800;
       letter-spacing: 2px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      flex: 1 1 100%;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    nav {
+      flex: 1 1 100%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
     nav a {
-      margin: 0 18px;
       text-decoration: none;
       color: white;
       font-weight: 700;
@@ -50,12 +61,23 @@
       transition: color 0.3s ease, transform 0.2s ease;
       cursor: pointer;
       text-shadow: 0 0 2px rgba(0,0,0,0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 8px;
+      user-select: none;
     }
 
     nav a:hover {
       color: #d6b07c;
       transform: translateZ(10px) scale(1.1);
       text-shadow: 0 0 6px #d6b07c;
+      background-color: rgba(214,176,124,0.15);
+    }
+
+    nav a.active {
+      color: #d6b07c;
+      background-color: rgba(214,176,124,0.3);
+      box-shadow: 0 0 8px #d6b07c;
+      transform: translateZ(10px) scale(1.1);
     }
 
     .cart-info {
@@ -81,6 +103,7 @@
       max-width: 900px;
       margin: 0 auto;
       transform-style: preserve-3d;
+      min-height: 70vh;
     }
 
     section {
@@ -91,7 +114,7 @@
       box-shadow:
         0 8px 15px rgba(62,44,28,0.25),
         inset 0 -4px 8px rgba(255,255,255,0.9);
-      transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
       transform-style: preserve-3d;
       transform: translateZ(0);
     }
@@ -104,42 +127,144 @@
       cursor: default;
     }
 
-    .welcome {
-      text-align: center;
-    }
-
-    .welcome h2 {
-      font-size: 2.6rem;
-      margin-bottom: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 1.6px;
+    h2, h3 {
+      margin-top: 0;
       text-shadow: 1px 1px 3px rgba(62,44,28,0.2);
+      font-weight: 700;
+      color: #4a3621;
     }
 
-    .welcome p {
-      font-size: 1.25rem;
+    h2 {
+      font-size: 2.6rem;
+      letter-spacing: 1.6px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.9rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1.2px;
+    }
+
+    p {
+      font-size: 1.15rem;
       line-height: 1.6;
       color: #5a3c2b;
       font-weight: 600;
       text-shadow: 0 0 1px rgba(90,60,43,0.3);
     }
 
-    .poetry h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1.2rem;
-      font-weight: 700;
-      color: #4a3621;
-      letter-spacing: 1.2px;
-      text-shadow: 1px 1px 2px rgba(62,44,28,0.3);
+    /* Welcome Section */
+    .welcome p {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
+    /* Poetry Section */
     .poetry p {
       font-style: italic;
       font-size: 1.2rem;
-      line-height: 1.7;
-      color: #3e2c1c;
       font-weight: 600;
+      color: #3e2c1c;
       text-shadow: 0 0 2px rgba(62,44,28,0.15);
+    }
+
+    /* Menu Section */
+    .menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+    }
+
+    .menu-item {
+      background: #8b5e3c;
+      color: #fff6e5;
+      padding: 1rem 1.4rem;
+      border-radius: 12px;
+      box-shadow:
+        4px 4px 8px rgba(0,0,0,0.25),
+        inset 0 -3px 5px rgba(255,255,255,0.15);
+      font-weight: 700;
+      font-size: 1.15rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    .menu-item:hover {
+      transform: translateZ(10px) scale(1.05);
+      box-shadow:
+        6px 6px 12px rgba(0,0,0,0.35),
+        inset 0 -4px 6px rgba(255,255,255,0.25);
+    }
+    .menu-price {
+      font-style: normal;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    /* Events Section */
+    .events-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .event-item {
+      background: #d6b07c;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow:
+        3px 3px 6px rgba(0,0,0,0.2);
+      color: #3e2c1c;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: default;
+      transition: transform 0.3s ease;
+    }
+    .event-item:hover {
+      transform: translateZ(8px) scale(1.03);
+      box-shadow:
+        5px 5px 10px rgba(0,0,0,0.3);
+    }
+
+    /* Reviews Section */
+    .reviews-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .review-item {
+      background: #fff3d1;
+      padding: 1.3rem 1.8rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow:
+        3px 3px 7px rgba(0,0,0,0.15);
+      font-style: italic;
+      color: #4a3621;
+      font-weight: 600;
+      font-size: 1.1rem;
+      position: relative;
+      cursor: default;
+      transition: transform 0.3s ease;
+    }
+    .review-item:hover {
+      transform: translateZ(10px) scale(1.05);
+      box-shadow:
+        6px 6px 14px rgba(0,0,0,0.25);
+    }
+    .review-author {
+      font-weight: 700;
+      font-style: normal;
+      margin-top: 0.7rem;
+      text-align: right;
+      color: #6b4f29;
     }
 
     footer {
@@ -181,20 +306,25 @@
     }
 
     /* Responsive */
+    @media (max-width: 900px) {
+      .menu-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        border-radius: 0 0 0 0;
+      header h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
       }
 
       nav {
-        margin-top: 0.7rem;
+        gap: 10px;
       }
 
       nav a {
-        margin: 0 8px 0 0;
         font-size: 1rem;
+        padding: 0.25rem 0.6rem;
       }
 
       main {
@@ -222,21 +352,25 @@
   <header>
     <h1>CFNE Café ☕📖</h1>
     <nav>
-      <a href="#" id="home">Home ☕</a>
-      <a href="#" id="cart">Cart 🛒 <span class="cart-info" id="cartCount">0</span></a>
-      <a href="#" id="payment">Payment 💳</a>
-      <a href="#" id="about">About Us 📖</a>
+      <a href="#" class="active" data-section="welcome">Home ☕</a>
+      <a href="#" data-section="menu">Menu ☕🍰</a>
+      <a href="#" data-section="events">Events 🎤📅</a>
+      <a href="#" data-section="reviews">Reviews 📝</a>
+      <a href="#" data-section="cart">Cart 🛒 <span class="cart-info" id="cartCount">0</span></a>
+      <a href="#" data-section="payment">Payment 💳</a>
+      <a href="#" data-section="about">About Us 📖</a>
     </nav>
   </header>
 
   <main>
-    <section class="welcome">
+    <!-- Sections (only one visible at a time) -->
+    <section id="welcome" class="active-section">
       <h2>Welcome to CFNE Café</h2>
       <p>Your cozy corner for delicious coffee and inspiring poetry.</p>
       <button id="addToCartBtn">Add Coffee to Cart</button>
     </section>
 
-    <section class="poetry">
+    <section id="poetry" style="display:none;">
       <h3>Reading Poetry Corner 📚</h3>
       <p>
         Between each sip, a verse unfolds,<br/>
@@ -245,32 +379,123 @@
         A sanctuary for heart and mind.
       </p>
     </section>
+
+    <section id="menu" style="display:none;">
+      <h3>Our Menu ☕🍰</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          Espresso <span class="menu-price">$3.00</span>
+        </li>
+        <li class="menu-item">
+          Cappuccino <span class="menu-price">$4.50</span>
+        </li>
+        <li class="menu-item">
+          Latte <span class="menu-price">$4.00</span>
+        </li>
+        <li class="menu-item">
+          Mocha <span class="menu-price">$4.75</span>
+        </li>
+        <li class="menu-item">
+          Croissant <span class="menu-price">$2.50</span>
+        </li>
+        <li class="menu-item">
+          Blueberry Muffin <span class="menu-price">$3.25</span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="events" style="display:none;">
+      <h3>Upcoming Events 🎤📅</h3>
+      <ul class="events-list">
+        <li class="event-item">
+          Poetry Night - Sep 20, 7 PM
+        </li>
+        <li class="event-item">
+          Live Jazz Music - Sep 27, 8 PM
+        </li>
+        <li class="event-item">
+          Coffee Brewing Workshop - Oct 5, 6 PM
+        </li>
+      </ul>
+    </section>
+
+    <section id="reviews" style="display:none;">
+      <h3>Customer Reviews 📝</h3>
+      <ul class="reviews-list">
+        <li class="review-item">
+          "Best coffee in town! The atmosphere is so warm and welcoming."
+          <div class="review-author">- Emma R.</div>
+        </li>
+        <li class="review-item">
+          "I love their poetry nights. It’s a perfect blend of culture and caffeine."
+          <div class="review-author">- Liam T.</div>
+        </li>
+        <li class="review-item">
+          "Friendly staff and amazing pastries. Highly recommend!"
+          <div class="review-author">- Sophia W.</div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="cart" style="display:none;">
+      <h3>Your Cart 🛒</h3>
+      <p>Items added to your cart will appear here.</p>
+    </section>
+
+    <section id="payment" style="display:none;">
+      <h3>Payment 💳</h3>
+      <p>Checkout securely using your preferred payment method.</p>
+    </section>
+
+    <section id="about" style="display:none;">
+      <h3>About CFNE Café 📖</h3>
+      <p>
+        CFNE Café is dedicated to serving the finest coffee and fostering a community of poetry lovers and creatives.
+        We combine quality brews with inspiring events to create a unique experience.
+      </p>
+    </section>
+
   </main>
 
   <footer>
-    &copy; 2025 CFNE Café — Brewed with care and creativity ☕📖
+    &copy; 2025 CFNE Café. All rights reserved.
   </footer>
 
   <script>
-    const cartCountElem = document.getElementById('cartCount');
-    const addToCartBtn = document.getElementById('addToCartBtn');
+    // Navigation logic: Show/hide sections on nav click, highlight active link
+    const navLinks = document.querySelectorAll('nav a[data-section]');
+    const sections = document.querySelectorAll('main section');
+    const cartCountEl = document.getElementById('cartCount');
     let cartCount = 0;
 
-    addToCartBtn.addEventListener('click', () => {
-      cartCount++;
-      cartCountElem.textContent = cartCount;
-      alert(`Added coffee to cart! Total items: ${cartCount}`);
-    });
-
-    // Highlight active menu link on click
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', (e) => {
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
         e.preventDefault();
-        document.querySelectorAll('nav a').forEach(a => a.style.color = 'white');
-        link.style.color = '#d6b07c';
+        const target = link.getAttribute('data-section');
+
+        // Show the target section and hide others
+        sections.forEach(section => {
+          if(section.id === target) {
+            section.style.display = '';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+
+        // Remove 'active' class from all links, add to clicked
+        navLinks.forEach(nav => nav.classList.remove('active'));
+        link.classList.add('active');
       });
     });
+
+    // Simple Add to Cart button for demo
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    addToCartBtn.addEventListener('click', () => {
+      cartCount++;
+      cartCountEl.textContent = cartCount;
+      alert('Coffee added to cart! ☕');
+    });
   </script>
-  
+
 </body>
 </html>
